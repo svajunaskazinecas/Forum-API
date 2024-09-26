@@ -11,6 +11,7 @@ const questionSchema = mongoose.Schema({
   question_text: { type: String, required: true },
   date: { type: Date, default: Date.now },
   user_id: { type: String, required: true },
+  tags: { type: [String], required: true, default: [] },
 });
 
 const Question = mongoose.model("Question", questionSchema);

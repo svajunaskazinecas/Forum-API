@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const CreateNewQuestion = async (req, res) => {
   try {
-    const { question_title, question_text } = req.body;
+    const { question_title, question_text, tags } = req.body;
 
     if (!question_title || !question_text) {
       return res.status(400).json({ message: "Title and text are required." });
@@ -17,6 +17,7 @@ export const CreateNewQuestion = async (req, res) => {
       question_title,
       question_text,
       user_id: userUUID,
+      tags,
     });
 
     await newQuestion.save();
