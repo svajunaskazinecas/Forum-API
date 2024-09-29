@@ -59,8 +59,28 @@ export const login = async (req, res) => {
     res.status(200).json({
       message: "Login successful",
       jwt_token: token,
+      uuid: user.uuid,
     });
   } catch (err) {
     res.status(500).json({ message: "Auth failed", error: err.message });
   }
+};
+
+export const validateUser = (req, res) => {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).json({ mesage: "No token proviced" });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: "Invalid token" });
+    }
+
+    return res.status(200).json({
+      message: "Token is valid",
+      token: token,
+    });
+  });
 };

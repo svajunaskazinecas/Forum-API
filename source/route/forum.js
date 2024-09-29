@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import { signUp, login } from "../controller/signIn.js";
+import { signUp, login, validateUser } from "../controller/signIn.js";
 import {
   CreateNewQuestion,
   GetAllQuestions,
@@ -16,6 +16,7 @@ import {
 
 router.post("/register", signUp);
 router.post("/login", login);
+router.get("/login/validate", validateUser);
 router.post("/question", auth, CreateNewQuestion);
 router.get("/questions", GetAllQuestions);
 router.delete("/question/:uuid", auth, deleteQuestion);

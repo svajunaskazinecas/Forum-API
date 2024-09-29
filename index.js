@@ -2,9 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
 import forumRouter from "./source/route/forum.js";
+import cors from "cors";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 mongoose
