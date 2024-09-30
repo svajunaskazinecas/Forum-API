@@ -60,6 +60,7 @@ export const login = async (req, res) => {
       message: "Login successful",
       jwt_token: token,
       uuid: user.uuid,
+      name: user.name,
     });
   } catch (err) {
     res.status(500).json({ message: "Auth failed", error: err.message });

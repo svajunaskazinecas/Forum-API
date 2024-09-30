@@ -70,3 +70,49 @@ export const deleteQuestion = async (req, res) => {
     });
   }
 };
+
+export const GetQuestionsByTag = async (req, res) => {
+  const tag = req.query.tag;
+
+  if (!tag) {
+    return res.status(400).json({ message: "Tag is required" });
+  }
+
+  try {
+    const questions = await Question.find({ tags: tag });
+
+    if (questions.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No questions found for this tag" });
+    }
+
+    return res.status(200).json({
+      message: `${questions.length} question(s) found for the tag: ${tag}`,
+      questions,
+    });
+  } catch (error) {
+    console.error("Error fetching questions by tag:", error);
+    return res.status(500).json({
+      message: "An error occurred while retrieving questions",
+      error: error.message,
+    });
+  }
+};
+
+export const GetQuestionByUUID = async (req, res) => {
+  const { uuid } = req.params;
+
+  try {
+    const question = await Question.findOne({ uuid });
+
+    if (!question) {
+      return res.status(404).json({ message: "Question not found" });
+    }
+
+    return res.status(200).json(question);
+  } catch (error) {
+    console.error("Error fetching question:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
