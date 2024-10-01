@@ -23,6 +23,9 @@ const answerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  user_id: {
+    type: String,
+  },
 });
 
 const Answer = mongoose.model("Answer", answerSchema);

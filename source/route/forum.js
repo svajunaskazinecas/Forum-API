@@ -14,6 +14,7 @@ import {
   createAnswer,
   getAnswersByQuestionUUID,
   deleteAnswerByUUID,
+  voteAnswer,
 } from "../controller/answer.js";
 
 router.post("/register", signUp);
@@ -27,5 +28,6 @@ router.delete("/question/:uuid", auth, deleteQuestion);
 router.post("/question/:uuid/answers", auth, createAnswer);
 router.get("/question/:uuid/answers", getAnswersByQuestionUUID);
 router.delete("/answer/:uuid", auth, deleteAnswerByUUID);
+router.post("/answers/:uuid/vote", auth, voteAnswer);
 
 export default router;
