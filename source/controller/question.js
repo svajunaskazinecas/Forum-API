@@ -116,3 +116,20 @@ export const GetQuestionByUUID = async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
+
+export const GetTagsCount = async (req, res) => {
+  try {
+    const tagCounts = await Question.aggregate([
+      { $unwind: "$tags" },
+      { $group: { _id: "$tags", count: { $sum: 1 } } },
+    ]);
+
+    return res.status(200).json(tagCounts);
+  } catch (error) {
+    console.error("Error fetching tag counts:", error);
+    return res.status(500).json({
+      message: "An error occurred while fetching tag counts",
+      error: error.message,
+    });
+  }
+};

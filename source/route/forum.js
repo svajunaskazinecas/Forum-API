@@ -8,6 +8,7 @@ import {
   deleteQuestion,
   GetQuestionsByTag,
   GetQuestionByUUID,
+  GetTagsCount,
 } from "../controller/question.js";
 import { auth } from "../middleware/auth.js";
 import {
@@ -23,6 +24,7 @@ router.get("/login/validate", validateUser);
 router.post("/question", auth, CreateNewQuestion);
 router.get("/question", GetAllQuestions);
 router.get("/questions", GetQuestionsByTag);
+router.get("/tags/count", GetTagsCount);
 router.get("/questions/:uuid", GetQuestionByUUID);
 router.delete("/question/:uuid", auth, deleteQuestion);
 router.post("/question/:uuid/answers", auth, createAnswer);
